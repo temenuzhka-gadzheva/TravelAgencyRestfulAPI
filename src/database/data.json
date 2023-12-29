@@ -1,0 +1,39 @@
+{
+  "locations": [
+    {
+      "id": 1,
+      "street": "Jim Rosa Lane",
+      "number": "2559",
+      "city": "San Francisco",
+      "country": "USA"
+    },
+    {
+      "id": 2,
+      "street": "Mattersburger Strasse ",
+      "number": "94",
+      "city": "Penetzdorf",
+      "country": "Austria"
+    },
+    {
+      "id": 3,
+      "street": "rue Petite Fusterie",
+      "number": "44",
+      "city": "Bourges",
+      "country": "France"
+    },
+    {
+      "id": 4,
+      "street": "Amerveldstraat",
+      "number": "401",
+      "city": "Huppaye",
+      "country": "Belgium"
+    },
+    {
+      "id": 5,
+      "street": "Avda. Andalucía ",
+      "number": "41",
+      "city": "Sorzano",
+      "country": "Spain"
+    }
+  ]
+}
