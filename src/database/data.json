@@ -14,5 +14,37 @@
       "city": "Weizelsdorf",
       "country": "Autria"
     }
+  ],
+  "holidays": [
+    {
+      "id": 1,
+      "title": "test",
+      "startDate": "2023-12-30",
+      "duration": 3,
+      "price": "300",
+      "freeSlots": 2,
+      "location": {
+        "id": 1,
+        "street": "Heliport Loop",
+        "number": "3319",
+        "city": "Anchorage",
+        "country": "USA"
+      }
+    },
+    {
+      "id": 2,
+      "title": "test 3",
+      "startDate": "2023-12-28",
+      "duration": 4,
+      "price": 300,
+      "freeSlots": 3,
+      "location": {
+        "id": 2,
+        "street": "Zeppelinstr",
+        "number": "69",
+        "city": "Weizelsdorf",
+        "country": "Autria"
+      }
+    }
   ]
 }
