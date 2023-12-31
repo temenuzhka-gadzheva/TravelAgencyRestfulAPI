@@ -2,6 +2,8 @@ const express = require('express');
 const reservationController = require('../controllers/Reservation');
 const router = express.Router();
 
+// CRUD functionality 
+// implement find reservation
 router.get('/reservations', reservationController.getAllReservations);
 router.get('/reservations/:id', reservationController.getReservationById);
 router.get('/find-reservation', reservationController.findReservationByPhoneNumber);

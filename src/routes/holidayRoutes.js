@@ -3,9 +3,10 @@ const router = express.Router();
 
 const holidayController = require('../controllers/Holiday');
 
+// CRUD functionality
 router.get('/holidays', holidayController.getAllHolidays);
 router.get('/holidays/:id', holidayController.getHolidayById);
-router.post('/holidays', holidayController.addHoliday);
+router.post('/holidays', holidayController.createHoliday);
 router.put('/holidays', holidayController.updateHoliday);
 router.delete('/holidays/:id', holidayController.deleteHoliday);
 

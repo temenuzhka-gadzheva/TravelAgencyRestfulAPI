@@ -13,31 +13,30 @@
       "number": "122",
       "city": "Arequipa",
       "country": "Peru"
+    },
+    {
+      "id": 3,
+      "street": "Chaussée de Tirlemont",
+      "number": "4",
+      "city": "Ways",
+      "country": "Belgium"
+    },
+    {
+      "id": 4,
+      "street": "Brandenburgische Str",
+      "number": "72",
+      "city": "Bickenbach",
+      "country": "Germany"
     }
   ],
   "holidays": [
     {
       "id": 1,
-      "title": "My vacantion in Peru",
-      "startDate": "2024-03-01",
+      "title": "Vacantion in USA",
+      "startDate": "2024-01-01",
       "duration": 10,
-      "price": "4000",
-      "freeSlots": 2,
-      "location": {
-        "id": 2,
-        "street": "Avenida Tahuaycani",
-        "number": "122",
-        "city": "Arequipa",
-        "country": "Peru"
-      }
-    },
-    {
-      "id": 2,
-      "title": "My dream holiday in USA",
-      "startDate": "2024-04-08",
-      "duration": 20,
-      "price": "20000",
-      "freeSlots": 4,
+      "price": "5000",
+      "freeSlots": 5,
       "location": {
         "id": 1,
         "street": "Graystone Lakes",
@@ -45,7 +44,98 @@
         "city": "Chester",
         "country": "USA"
       }
+    },
+    {
+      "id": 2,
+      "title": "Vacantion in Belgium",
+      "startDate": "2024-01-15",
+      "duration": 6,
+      "price": "1000",
+      "freeSlots": 2,
+      "location": {
+        "id": 3,
+        "street": "Chaussée de Tirlemont",
+        "number": "4",
+        "city": "Ways",
+        "country": "Belgium"
+      }
+    },
+    {
+      "id": 3,
+      "title": "Vacantion in Germany",
+      "startDate": "2024-03-01",
+      "duration": 10,
+      "price": "4000",
+      "freeSlots": 3,
+      "location": {
+        "id": 4,
+        "street": "Brandenburgische Str",
+        "number": "72",
+        "city": "Bickenbach",
+        "country": "Germany"
+      }
     }
   ],
-  "reservations": []
+  "reservations": [
+    {
+      "id": 1,
+      "contactName": "Sam Smith Jr.",
+      "phoneNumber": "0884678324",
+      "holiday": {
+        "id": 3,
+        "title": "Vacantion in Germany",
+        "startDate": "2024-03-01",
+        "duration": 10,
+        "price": "4000",
+        "freeSlots": 3,
+        "location": {
+          "id": 4,
+          "street": "Brandenburgische Str",
+          "number": "72",
+          "city": "Bickenbach",
+          "country": "Germany"
+        }
+      }
+    },
+    {
+      "id": 2,
+      "contactName": "Peter Bon",
+      "phoneNumber": "0886456342",
+      "holiday": {
+        "id": 2,
+        "title": "Vacantion in Belgium",
+        "startDate": "2024-01-15",
+        "duration": 6,
+        "price": "1000",
+        "freeSlots": 2,
+        "location": {
+          "id": 3,
+          "street": "Chaussée de Tirlemont",
+          "number": "4",
+          "city": "Ways",
+          "country": "Belgium"
+        }
+      }
+    },
+    {
+      "id": 3,
+      "contactName": "Emily Bronte",
+      "phoneNumber": "0887180702",
+      "holiday": {
+        "id": 1,
+        "title": "Vacantion in USA",
+        "startDate": "2024-01-01",
+        "duration": 10,
+        "price": "5000",
+        "freeSlots": 5,
+        "location": {
+          "id": 1,
+          "street": "Graystone Lakes",
+          "number": "4733",
+          "city": "Chester",
+          "country": "USA"
+        }
+      }
+    }
+  ]
 }

@@ -1,107 +1,84 @@
-const fs = require('fs');
-const path = require('path');
 const Reservation = require('../models/Reservation');
+const { readData, writeData } = require('../utils/utils');
+const { getUpdatedBody } = require('../utils/reservationUtils');
 
-const dataFilePath = path.join(__dirname, '..', 'database', 'data.json');
-
-function readData() {
-    const data = fs.readFileSync(dataFilePath, 'utf8');
-    return JSON.parse(data);
-}
-
-function writeData(data) {
-    fs.writeFileSync(dataFilePath, JSON.stringify(data, null, 2), 'utf8');
-}
-
+// get all reservations
 exports.getAllReservations = (req, res) => {
-    const data = readData();
+    let data = readData();
     res.json(data.reservations);
 };
 
+// get reservation by id 
 exports.getReservationById = (req, res) => {
-    const data = readData();
-    const id = parseInt(req.params.id);
-    const reservation = data.reservations.find(r => r.id === id);
+    let data        = readData();
+    let id          = parseInt(req.params.id);
+    let reservation = data.reservations.find(x => x.id === id);
 
-    if (reservation) {
-        res.json(reservation);
-    } else {
-        res.status(404).send('Reservation not found');
-    }
+    reservation ? res.json(reservation) : res.status(404).send(`Reservation with ID: ${id} not found`);
 };
 
+// create reservation
 exports.createReservation = (req, res) => {
     let data = readData();
-    const { contactName, phoneNumber, holiday } = req.body;
+    let { contactName, phoneNumber, holiday } = req.body;
 
-    const holidayObject = data.holidays.find(x => x.id === parseInt(holiday));
-
+    let holidayObject = data.holidays.find(x => x.id === parseInt(holiday));
     if (!holidayObject) {
-        return res.status(404).send(`Holiday not found for ID: ${holidayObject.id}`);
+        return res.status(404).send(`Holiday with ID: ${holidayObject.id} not found`);
     }
 
-    const newReservation = new Reservation(
-        data.reservations.length + 1,
-        contactName,
-        phoneNumber,
-        holidayObject
-    );
+    let createReservation = new Reservation(data.reservations.length + 1, contactName, phoneNumber, holidayObject);
 
-    data.reservations.push(newReservation);
+    data.reservations.push(createReservation);
     writeData(data);
-    res.status(201).json(newReservation);
+    res.status(201).json(createReservation);
 };
 
+// update reservation
 exports.updateReservation = (req, res) => {
     let data = readData();
-    const { id, contactName, phoneNumber, holiday } = req.body;
+    let { id, contactName, phoneNumber, holiday } = req.body;
 
-    // Find the index of the reservation to update
-    const reservationIndex = data.reservations.findIndex(r => r.id === parseInt(id));
-    if (reservationIndex === -1) {
-        return res.status(404).send('Reservation not found');
+    let foundedReservationIndex = data.reservations.findIndex(r => r.id === parseInt(id));
+    if (foundedReservationIndex === -1) {
+        return res.status(404).send(`Reservation with ID: ${foundedReservationIndex} not found`);
     }
 
-    // Optionally update the holiday object if the holiday ID is provided
-    let holidayObject = data.reservations[reservationIndex].holiday;
+    let holidayObject = data.reservations[foundedReservationIndex].holiday;
+    
     if (holiday) {
         holidayObject = data.holidays.find(x => x.id === parseInt(holiday));
         if (!holidayObject) {
-            return res.status(404).send(`Holiday not found for ID: ${holiday}`);
+            return res.status(404).send(`Holiday with ID: ${holiday} not found`);
         }
     }
 
-    // Update the reservation details
-    data.reservations[reservationIndex].contactName = contactName || data.reservations[reservationIndex].contactName;
-    data.reservations[reservationIndex].phoneNumber = phoneNumber || data.reservations[reservationIndex].phoneNumber;
-    data.reservations[reservationIndex].holiday = holidayObject;
+    data.reservations[foundedReservationIndex] = getUpdatedBody(data.reservations, foundedReservationIndex, holidayObject, { contactName, phoneNumber});
 
     writeData(data);
-    res.json(data.reservations[reservationIndex]);
+    res.json(data.reservations[foundedReservationIndex]);
 };
 
+// find reservation bu phone number
 exports.findReservationByPhoneNumber = (req, res) => {
-    const { phoneNumber } = req.query;
-    const data = readData();
-    const reservation = data.reservations.find(r => r.phoneNumber === phoneNumber);
+    let phoneNumber = req.query;
+    let data        = readData();
+    let reservation = data.reservations.find(x => x.phoneNumber === phoneNumber);
 
-    if (reservation) {
-        res.json(reservation);
-    } else {
-        res.status(404).send('Reservation not found');
-    }
+    reservation ? res.json(reservation) : res.status(404).send(`Reservation with this phone number: ${phoneNumber} not found`);
 };
 
+// delete reservation
 exports.deleteReservation = (req, res) => {
-    const data = readData();
-    const id = parseInt(req.params.id);
-    const reservationIndex = data.reservations.findIndex(r => r.id === id);
-
+    let data             = readData();
+    let id               = parseInt(req.params.id);
+    let reservationIndex = data.reservations.findIndex(x => x.id === id);
+    
     if (reservationIndex > -1) {
-        data.reservations.splice(reservationIndex, 1); // Remove the reservation
-        writeData(data);
-        res.status(200).send('Reservation deleted');
+      data.reservations.splice(reservationIndex, 1);
+      writeData(data);
+      res.status(200).send(`Reservation with ID: ${reservationIndex} deleted`);
     } else {
-        res.status(404).send('Reservation not found');
+      res.status(404).send(`Reservation with ID: ${reservationIndex} not found`);
     }
 };
