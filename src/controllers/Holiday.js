@@ -13,9 +13,34 @@ function writeData(data) {
     fs.writeFileSync(dataFilePath, JSON.stringify(data, null, 2), 'utf8');
 }
 
+ // add filter to can find holiday by fields 
 exports.getAllHolidays = (req, res) => {
+    const { location, startDate, duration } = req.query;
     const data = readData();
-    res.json(data.holidays);
+
+    let filteredHolidays = data.holidays;
+
+    // Filter by country or city in location
+    if (location) {
+        filteredHolidays = filteredHolidays.filter(h =>
+            h.location.country.toLowerCase() === location.toLowerCase() || 
+            h.location.city.toLowerCase() === location.toLowerCase()
+        );
+    }
+
+    // Filter by start date
+    if (startDate) {
+        const startDateObject = new Date(startDate);
+        filteredHolidays = filteredHolidays.filter(h => new Date(h.startDate) >= startDateObject);
+    }
+
+    // Filter by duration
+    if (duration) {
+        const durationNumber = parseInt(duration);
+        filteredHolidays = filteredHolidays.filter(h => h.duration === durationNumber);
+    }
+
+    res.json(filteredHolidays);
 };
 
 exports.getHolidayById = (req, res) => {
