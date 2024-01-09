@@ -65,7 +65,7 @@ This backend not only serves as the technological backbone for travel agencies b
 - GET /holidays: Fetch all holidays.
 - POST /holidays: Create a new holiday.
 - GET /holidays/{id}: Get a specific holiday by ID.
-- PUT /holidays/{id}: Update an existing holiday.
+- PUT /holidays: Update an existing holiday.
 - DELETE /holidays/{id}: Delete a holiday.
 
 #### Reservations
@@ -77,5 +77,5 @@ This backend not only serves as the technological backbone for travel agencies b
 - GET /locations: Retrieve all locations.
 - POST /locations: Add a new location.
 - GET /locations/{id}: Get details of a specific location.
-- PUT /locations/{id}: Update location details.
+- PUT /locations: Update location details.
 - DELETE /locations/{id}: Remove a location.
